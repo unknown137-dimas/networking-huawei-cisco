@@ -1,0 +1,59 @@
+[SW1]
+sys
+ospf 1
+silent-interface g0/0/21
+silent-interface g0/0/2
+area 0
+network 10.1.11.2 0.0.0.0
+network 4.4.4.4 0.0.0.0
+authentication-mode md5 1 cipher ICT@2019
+area 1
+network 192.168.10.253 0.0.0.0
+network 192.168.20.253 0.0.0.0
+network 192.168.30.254 0.0.0.0
+authentication-mode md5 1 cipher ICT@2019
+
+[SW2]
+sys
+ospf 1
+silent-interface g0/0/21
+silent-interface g0/0/2
+area 0
+network 10.1.12.2 0.0.0.0
+network 5.5.5.5 0.0.0.0
+authentication-mode md5 1 cipher ICT@2019
+area 1
+network 192.168.10.253 0.0.0.0
+network 192.168.20.253 0.0.0.0
+authentication-mode md5 1 cipher ICT@2019
+
+[R1]
+sys
+ospf 1
+area 0
+network 10.1.1.1 0.0.0.0
+network 10.1.11.1 0.0.0.0
+network 10.1.12.1 0.0.0.0
+network 1.1.1.1 0.0.0.0
+authentication-mode md5 1 cipher ICT@2019
+q
+int g0/0/0
+ospf network-type p2p
+undo sh
+
+[FW1]
+sys
+ospf 1
+area 0
+network 10.1.1.2 0.0.0.0
+network 192.168.100.1 0.0.0.0
+network 7.7.7.7 0.0.0.0
+authentication-mode md5 1 cipher ICT@2019
+q
+int g1/0/0
+ospf network-type p2p
+undo sh
+q
+
+
+

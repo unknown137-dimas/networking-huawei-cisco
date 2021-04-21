@@ -1,0 +1,30 @@
+[SW1]
+sys
+int eth-trunk1
+mode lacp-static
+load-balance src-dst-mac
+trunkport g0/0/22
+trunkport g0/0/23
+trunkport g0/0/24
+lacp preempt delay 10
+q
+lacp priority 100
+int g0/0/22
+lacp priority 100
+undo sh
+int g0/0/23
+lacp priority 100 
+undo sh
+q
+
+[SW2]
+sys
+int eth-trunk1
+mode lacp-static
+load-balance src-dst-mac
+trunkport g0/0/22
+trunkport g0/0/23
+trunkport g0/0/24
+lacp preempt delay 10
+q
+

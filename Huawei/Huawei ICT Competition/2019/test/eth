@@ -1,0 +1,17 @@
+int eth 1
+mo la
+max ac 2
+la preem en
+la preem del 10
+#load-balanc src-dst-mac
+q
+la pri 100
+
+int g0/0/22
+eth 1
+la pri 100
+int g0/0/23
+eth 1
+la pri 100
+int g0/0/24
+eth 1

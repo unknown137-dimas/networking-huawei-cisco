@@ -1,0 +1,78 @@
+
+[r1]
+int loopback0
+ip add  1.1.1.1 32
+int tunnel0/0/0
+ip add  10.1.13.1 30
+int g0/0/0 
+ip add 10.1.1.1 30
+int g0/0/1 
+ip add 10.1.12.1 30
+int g0/0/2
+ip add 10.1.11.1 30
+int g0/0/3
+ip add 10.1.12.1 30
+
+[r3 ]
+int g0/0/0 
+ip add 200.1.2.1 30
+int tunnel0/0/0 
+ip add 10.1.13.2 30
+int g0/0/1 
+ip add 10.2.1.1 30
+int g0/0/2 
+ip add 10.1.2.6 30
+
+[r4 ]
+int loopback0
+ip add  100.100.100.1 32
+int g0/0/0
+ip add  100.1.1.2 30
+int g0/0/1
+ip add 100.1.2.2 30
+
+[sw1 ]
+int loopback0
+ip add  4.4.4.4 32
+int vlanif 10 
+ip add 192.168.10.253 24
+int vlanif 20 
+ip add 192.168.20.253 24
+int vlanif 30 
+ip add 192.168.30.254 24
+int vlanif 1
+ip add  10.1.11.2 30
+
+[sw2] 
+int loopback0 
+ip add 5.5.5.5 32
+int vlanif 10 
+ip add 192.168.10.252 24
+int vlanif 20 
+ip add 192.168.20.252 24
+int vlanif 1 
+ip add 10.1.12.2 30
+
+[sw4]
+int vlanif 40
+ip add  192.168.40.254 24
+int vlanif 50
+ip add  192.168.50.254 24
+int vlanif 1 
+ip add 10.2.1.2 30
+
+[ac1] 
+int vlanif 31
+ip add  192.168.31.254 24
+
+[fw1]
+int loopback0
+ip add  7.7.7.7 32
+int g1/0/0 
+ip add 10.1.1.2 30
+int g1/0/1 
+ip add 192.168.100.1 24
+int g1/0/2 
+ip add 100.1.1.1 30
+int g1/0/3 
+ip add 100.1.2.1 30

@@ -1,0 +1,19 @@
+[SW4]
+sys
+user-interface vty 0 4
+authentication-mode aaa
+q
+
+aaa
+local-user admin password simple Huawei@123
+local-user admin service-type telnet
+q
+
+acl 2000
+rule permit source 4.4.4.4 0.0.0.0
+rule deny
+q
+
+user-interface vty 0 4
+acl 2000 inbound
+q

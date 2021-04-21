@@ -1,0 +1,50 @@
+[sw1]
+vl bat 10 20 30 31
+int eth 1
+po li tr
+po tr al vl 10 20 30 31
+int g0/0/21
+po li tr
+po tr al vl 10 20 30 31
+int g0/0/2
+po li tr
+po tr al vl 30 31
+
+[sw2]
+vl bat 10 20 30 31
+int eth 1
+po li tr
+po tr al vl 10 20 30 31
+int g0/0/21
+po li tr
+po tr al vl 10 20 30 31
+int g0/0/2
+po li tr 
+po tr al vl 30 31
+
+[sw3]
+vl bat 10 20 30 31
+int g0/0/1
+po li ac
+po def vl 10
+int g0/0/2
+po li ac
+po def vl 20
+int g0/0/21
+po li tr
+po tr al vl 10 20 30 31
+
+[sw4]
+vl bat 40 50
+int g0/0/2
+po li ac
+po def vl 40
+int g0/0/3
+po li ac
+po def vl 50
+
+[ac1]
+vl bat 30 31
+int g0/0/1
+po li tr
+po tr al vl 30 31

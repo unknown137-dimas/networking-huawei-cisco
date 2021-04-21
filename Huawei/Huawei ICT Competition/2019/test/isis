@@ -1,0 +1,22 @@
+[r3]
+isis 1
+network-ent 49.0001.0000.0000.0003
+is-level #level-2
+domain-authentication-mode md5 Huawei@2019
+int lo0
+#isis en 1 
+int g0/0/1
+#isis en 1 
+
+[sw4]
+isis 1
+network-ent 49.0001.0000.0000.0004
+is-level #level-2
+domain-authentication-mode md5 Huawei@2019
+int vl 1
+#isis en 1 
+int vl 40
+#isis en 1 
+int vl 50
+#isis en 1 
+

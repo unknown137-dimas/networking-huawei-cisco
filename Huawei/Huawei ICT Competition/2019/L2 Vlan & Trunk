@@ -1,0 +1,46 @@
+[SW1 & SW2]
+int eth-trunk1
+port link-type trunk 
+port trunk allow-pass vlan 10 20 30 31
+undo sh
+int g0/0/2
+port link-type trunk
+port trunk allow-pass vlan 30 31
+undo sh 
+int g0/0/21
+port link-type trunk
+port trunk allow-pass vlan 10 20 30 31
+undo sh
+
+[SW3]
+sys
+sysname SW3
+vlan batch 10 20
+int g0/0/21
+port link-type trunk
+port trunk allow-pass vlan 10 20 30 31
+int g0/0/22
+port link-type trunk
+port trunk allow-pass vlan 10 20 30 31
+int g0/0/1
+port link-type access
+port default vlan 10
+undo sh
+int g0/0/2
+port link-type access
+port default vlan 20
+undo sh
+
+[SW4]
+sys
+sysname SW4
+int g0/0/2
+port link-type access
+port default vlan 40
+undo sh
+int g0/0/3
+port link-type access
+port default vlan 50
+undo sh
+
+

@@ -1,0 +1,24 @@
+[SW1]
+sys
+int vlan 10
+vrrp vrid 1 virtual-ip 192.168.10.254
+vrrp vrid 1 priority 120
+vrrp vrid 1 preempt-mode timer delay 20
+undo sh
+int vlan 20
+vrrp vrid 2 virtual-ip 192.168.20.254
+undo sh
+q
+
+[SW2]
+sys
+int vlan 10
+vrrp vrid 1 virtual-ip 192.168.10.254
+undo sh
+int vlan 20
+vrrp vrid 2 virtual-ip 192.168.20.254
+vrrp vrid 2 priority 120
+vrrp vrid 2 preempt-mode timer delay 20
+undo sh
+q
+

@@ -1,0 +1,20 @@
+[sw1]
+bfd
+bfd #huawei bind peer IP
+discr loc 1
+di rem 2
+#min-tx-inter 100
+#min-rx-inter 100
+comm
+
+
+[sw2]
+bfd
+bfd #huawei bind peer IP
+discr loc 2
+di rem 1
+min-tx-inter 100
+min-rx-inter 100
+comm
+int vl 10
+vrrp #vrid 1 track bfd-session #2 #increased #30

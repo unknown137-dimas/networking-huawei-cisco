@@ -1,0 +1,14 @@
+[sw4]
+acl 2000
+rule 5 perm source 4.4.4.4 0.0.0.0
+rule 10 deny
+
+aaa
+#local-user admin pass sim Huawei@123
+#local-user admin service-typ telnet
+
+user-int vty 0 4
+auth aaa
+acl 2000 inbound
+
+

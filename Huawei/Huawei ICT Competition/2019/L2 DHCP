@@ -1,0 +1,23 @@
+[SW1]
+sys
+dhcp enable
+ip pool VLAN10
+gateway-list 192.168.10.254
+dns-list 8.8.8.8
+network 192.168.10.0 mask 24
+excluded-ip-address 192.168.10.252 192.168.10.253
+q
+int vlan 10
+dhcp select global
+
+[SW2]
+sys
+dhcp enable
+ip pool VLAN20
+gateway-list 192.168.20.254
+dns-list 8.8.8.8
+network 192.168.20.0 mask 24
+excluded-ip-address 192.168.20.252 192.168.20.253
+q
+int vlan 20
+dhcp select global

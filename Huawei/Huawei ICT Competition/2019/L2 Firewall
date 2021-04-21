@@ -1,0 +1,58 @@
+[FW1]
+sys
+sysname FW1
+firewall zone dmz
+add int g1/0/1
+firewall zone trust
+add int g1/0/0
+firewall zone untrust
+add int g1/0/2
+add int g1/0/3
+q
+
+ip route-static 0.0.0.0 0.0.0.0 100.1.1.2
+ip route-static 0.0.0.0 0.0.0.0 100.1.2.2 preference 100
+ospf 1
+default-route-advertise
+q
+
+security-policy
+rule name inside
+source-zone trust
+destination-zone dmz
+source-address 192.168.40.0 mask 255.255.255.0
+source-address 192.168.10.0 mask 255.255.255.0
+source-address 192.168.20.0 mask 255.255.255.0
+destination-address 192.168.100.2 32
+action permit
+q
+
+security-policy
+rule name nattointernet
+source-zone trust
+destination-zone untrust
+source-address 192.168.40.0 mask 255.255.255.0
+source-address 192.168.10.0 mask 255.255.255.0
+destination-address 100.100.100.1 32
+action permit
+q
+
+nat-policy
+rule name outside
+source-zone trust
+destination-zone untrust
+source-address 192.168.40.0 mask 255.255.255.0
+source-address 192.168.10.0 mask 255.255.255.0
+destination-address 100.100.100.1 32
+action nat easy-ip
+
+[R1]
+sys
+ospf 1
+default-route-advertise
+
+[R3]
+sys
+isis 1
+default-route-advertise
+

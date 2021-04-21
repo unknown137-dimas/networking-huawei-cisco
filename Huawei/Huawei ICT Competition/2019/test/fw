@@ -1,0 +1,37 @@
+firewall zone trust
+add int g1/0/0
+firewall zone untrust
+add int g1/0/2
+add int g1/0/3
+firewall zone dmz
+add int g1/0/1
+
+ip route-static 0.0.0.0 0.0.0.0 100.1.1.2
+ip route-static 0.0.0.0 0.0.0.0 100.1.2.2 pref 100
+
+#ospf 1
+#default-route-advertise
+
+security-policy
+#rule name inside
+#source-address 192.168.10.0 mask 255.255.255.0
+#source-address 192.168.20.0 mask 255.255.255.0
+#source-address 192.168.40.0 mask 255.255.255.0
+#destination-address 192.168.100.2 32
+#source-zone trust
+#destination-zone dmz
+action perm
+
+nat-policy
+#rule name outside
+#source-address 192.168.10.0 24
+#source-address 192.168.30.0 24
+#source-address 192.168.40.0 24
+#destination-address 100.100.100.1 32
+#source-zone trust
+#destination-zone untrust
+#action nat easy-ip
+
+[r1,r3]
+#ospf 1
+#default-route-advertise

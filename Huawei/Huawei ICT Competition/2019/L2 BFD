@@ -1,0 +1,31 @@
+[SW1]
+sys
+bfd
+q
+bfd SW1 bind peer-ip 192.168.10.252
+discriminator local 1
+discriminator remote 2
+min-rx-interval 100
+min-tx-interval 100
+commit
+undo sh
+q
+
+
+[SW2]
+sys
+bfd
+q
+bfd SW2 bind peer-ip 192.168.10.253
+discriminator local 2
+discriminator remote 1
+min-rx-interval 100
+min-tx-interval 100
+commit
+undo sh
+q
+
+int vlan 10
+vrrp vrid 1 track bfd-session 2 increased 30
+undo sh
+q

@@ -1,0 +1,17 @@
+[sw1]
+dhcp en
+ip pool VLAN10
+#gateway 192.168.10.254
+network 192.168.10.0 mask 24
+dns-ser 8.8.8.8
+int vl 10
+#dh sel glo
+
+[sw2]
+dhcp en
+ip pool VLAN20
+#gateway 192.168.20.254
+network 192.168.20.0 mask 24
+dns-ser 8.8.8.8
+int vl 20
+#dh sel glo

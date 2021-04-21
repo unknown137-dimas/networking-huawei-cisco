@@ -1,0 +1,15 @@
+[sw1]
+int vl 10
+vrrp #vrid 1 virt 192.168.10.254
+vrrp pri 120
+vrrp preem time del 20
+int vl 20
+vrrp #vrid 2 virt 192.168.20.254
+
+[sw2]
+int vl 10
+vrrp #vrid 1 virt 192.168.10.254
+int vl 20
+vrrp #vrid 2 virt 192.168.20.254
+vrrp pri 120
+vrrp preem time del 20

@@ -1,0 +1,25 @@
+[ac]
+wlan
+ap-group name huawei
+ap-group huawei
+ap-id 1 ap-type 60 ap-mac xxx ap-sn xxx
+security-profile name huawei
+sec wpa psk Huawei@2019 aes
+ssid-profile name huawei
+ssid HuaweiICT01
+regulatory-domain name huawei
+country-code CN
+vap-profile name huawei
+ssid-profile huawei
+security-profile huawei
+regulatory-domain huawei
+service-vl vl 30
+forward direct
+
+[sw1]
+ip pool name laptop
+network 192.168.30.0 mask 24
+gate 192.168.30.254
+ex 192.168.30.1
+int vl 30
+dhcp glo sel

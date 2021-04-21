@@ -1,0 +1,30 @@
+[r1]
+int tunnel0/0/0
+tunnel-mode gre
+keepalive
+source 200.1.1.1
+dest 200.1.2.1
+#undo sh
+ip route-static #200.1.2.0 #30 #200.1.1.2
+ospf 1
+ar 0
+#import isis type 2
+net 10.1.13.1 0.0.0.0
+#authentication-mo md5 1 ciph ICT@2019
+
+
+[r3]
+int tunnel0/0/0
+tunnel-mode gre
+keepalive
+source 200.1.2.1
+dest 200.1.1.1
+ip route-static #200.1.1.0 #30 #200.1.2.2
+ospf 1
+ar 0
+net 10.1.13.2 0.0.0.0
+#authentication-mo md5 1 ciph ICT@2019
+import isis #type 2
+
+is 1
+import ospf 1

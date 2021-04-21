@@ -1,0 +1,137 @@
+[R1]
+sys
+sysname R1
+int loo0
+ip add 1.1.1.1 32
+undo sh
+int Tunnel0/0/0
+ip add 10.1.13.1 30
+undo sh
+q
+int g0/0/0
+ip add 10.1.1.1 30
+undo sh
+int g0/0/1
+ip add 200.1.1.1 30
+undo sh
+int g0/0/2
+ip add 10.1.11.1 30
+undo sh
+int g0/0/3
+ip add 10.1.12.1 30
+undo sh
+q
+
+[R3]
+sys
+sysname R3
+int g0/0/0
+ip add 200.1.2.1 30
+undo sh
+int tunnel0/0/0
+ip add 10.1.13.2 30
+undo sh
+int g0/0/1
+ip add 10.2.1.1 30
+undo sh
+int g0/0/2
+ip add 10.1.2.6 30
+undo sh
+q
+
+[R4]
+sys
+sysname R4
+int loo0
+ip add 100.100.100.1 32
+undo sh
+int g0/0/0
+ip add 100.1.1.2 30
+undo sh
+int g0/0/1
+ip add 100.1.2.2 30
+undo sh
+
+[SW1]
+sys
+sysname SW1
+int loo0
+ip add 4.4.4.4 32 
+undo sh 
+vlan batch 10 20 30
+int vlan 10
+ip add 192.168.10.253 24
+undo sh
+int vlan 20
+ip add 192.168.20.253 24
+undo sh
+int vlan 30
+ip add 192.168.30.253 24
+undo sh
+int vlan 1
+ip add 10.1.11.2 30
+undo sh 
+
+[SW2]
+sys 
+sysname SW2 
+int loo0
+ip add 5.5.5.5 32
+undo sh
+vlan batch 10 20 
+int vlan 10
+ip add 192.168.10.252 24
+undo sh
+int vlan 20
+ip add 192.168.20.252 24
+undo sh
+int vlan 1
+ip add 10.1.12.2 30
+undo sh
+q
+
+[SW4]
+sys
+sysname SW4
+vlan batch 40 50
+int vlan 40
+ip add 192.168.40.254 24
+undo sh
+int vlan 50
+ip add 192.168.50.254 24
+undo sh
+int vlan 1
+ip add 10.2.1.2 30 
+undo sh 
+
+[AC1]
+sys
+sysname AC1
+vlan batch 31
+int vlan 31
+ip add 192.168.31.254 24 
+undo sh 
+
+[FW1]
+sys
+sysname FW1
+int loo0
+ip add 7.7.7.7 32
+int g1/0/0
+ip add 10.1.1.2 30
+undo sh 
+int g1/0/1 
+ip add 192.168.100.1 24
+undo sh 
+int g1/0/2 
+ip add 100.1.1.1 30
+undo sh
+int g1/0/3
+ip add 100.1.2.1 30
+undo sh
+q
+
+
+
+
+

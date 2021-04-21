@@ -1,0 +1,31 @@
+[sw1-3]
+stp mo ms
+stp reg
+reg HUAWEI
+#ac reg
+inst 1 vl 10 30
+inst 2 vl 20
+[sw1]
+stp ins 1 ro pri
+stp ins 2 ro sec
+[sw2]
+stp ins 1 ro sec
+stp ins 2 ro pri
+
+[sw1-2]
+#stp enable
+#stp bpdu-protection
+#int g0/0/2
+#stp edged-port enable
+#undo sh
+
+[sw3]
+#stp enable
+#stp bpdu-protection
+#int g0/0/1
+#stp edged-port enable
+#undo sh
+#int g0/0/2
+#stp edged-port enable
+#undo sh
+#q

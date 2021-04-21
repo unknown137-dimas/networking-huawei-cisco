@@ -1,0 +1,67 @@
+sys
+bgp 100
+pe 10.1.70.7 as 200
+pe 10.1.70.7 pas sim Huawei
+ipv4 uni
+pe 10.1.70.7 en
+net 10.1.20.0 24
+net 10.1.30.0 24
+
+bgp 200
+pe 10.1.127.10 as 100
+pe 10.1.127.10 pas sim Huawei
+pe 10.1.127.10 con g0/0/0
+ipv4 uni
+pe 10.1.127.10 en
+net 10.1.70.0 24
+
+
+[sw1 & sw2]
+acl 2000
+rule 5 perm so 10.1.20.0 0.0.0.255
+rule 10 deny
+acl 2000
+rule 5 perm so 10.1.30.0 0.0.0.255
+rule 10 den
+
+aaa
+loc Huawei pas sim Huawei@2018
+loc Huawei priv lev 15
+loc Huawei serv telnet
+
+aaa
+loc Admin pas sim Admin@2018
+loc Admin priv lev 0
+loc Admin serv telnet
+
+int eth 1
+la pre en
+
+stp mo ms
+stp reg
+reg huawei
+ins 1 vl 20
+ins 2 vl 30
+ac reg
+
+
+
+
+[sw1]
+dhcp en
+ip pool ap
+net 10.1.15.0 mask 24
+ex 10.1.15.2
+gate 10.1.15.1
+int vl 15
+dhcp sel glo
+
+ip po huawei
+net 10.1.20.0 mask 24
+gate 10.1.20.13
+int vl 20
+dhcp sel glo
+
+int g0/0/5
+po li tr
+po tr al vl 30

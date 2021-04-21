@@ -1,0 +1,11 @@
+[ac]
+ip route-stat 0.0.0.0 0.0.0.0 10.1.50.1
+wlan
+vap-prof name Huawei
+service-vl vl 20
+[sw1]
+ip route-stat 8.8.8.8 255.255.255.255 10.1.50.2
+[sw1-2]
+bfd
+ospf 1
+bfd all-int en

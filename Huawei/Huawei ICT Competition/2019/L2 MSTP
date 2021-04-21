@@ -1,0 +1,60 @@
+[SW1]
+sys
+stp mode mstp
+stp region-config
+region-name HUAWEI
+instance 1 vlan 10 30
+instance 2 vlan 20
+active region-config
+undo sh
+q
+stp instance 1 root primary
+stp instance 2 root secondary
+
+stp enable
+stp bpdu-protection
+int g0/0/2
+stp edged-port enable
+undo sh
+q
+
+[SW2]
+sys
+stp mode mstp
+stp region-config
+region-name HUAWEI
+instance 1 vlan 10 30
+instance 2 vlan 20
+active region-config
+undo sh
+q
+stp instance 1 root secondary
+stp instance 2 root primary
+
+stp enable
+stp bpdu-protection
+int g0/0/2
+stp edged-port enable
+undo sh
+q
+
+[SW3]
+sys
+stp mode mstp
+stp region-config
+region-name HUAWEI
+instance 1 vlan 10 30
+instance 2 vlan 20
+active region-config
+undo sh
+q
+
+stp enable
+stp bpdu-protection
+int g0/0/1
+stp edged-port enable
+undo sh
+int g0/0/2
+stp edged-port enable
+undo sh
+q

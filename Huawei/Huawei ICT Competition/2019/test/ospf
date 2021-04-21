@@ -1,0 +1,50 @@
+[sw1]
+ospf 1
+#silent g0/0/21
+#silent g0/0/2
+ar 0
+auth md5 #1 ciph ICT@2019
+net 10.1.11.2 0.0.0.0
+net 4.4.4.4 0.0.0.0
+ospf 1
+ar 1
+auth md5 #1 ciph ICT@2019
+net 192.168.10.253 0.0.0.0
+net 192.168.20.253 0.0.0.0
+net 192.168.30.254 0.0.0.0
+
+[sw2]
+ospf 1
+#silent g0/0/21
+#silent g0/0/2
+ar 0
+auth md5 #1 ciph ICT@2019
+net 10.1.12.2 0.0.0.0
+net 5.5.5.5 0.0.0.0
+ospf 1
+ar 1
+auth md5 #1 ciph ICT@2019
+net 192.168.10.252 0.0.0.0
+net 192.168.20.252 0.0.0.0
+
+[r1]
+ospf 1
+ar 0
+auth md5 #1 ciph ICT@2019
+net 10.1.1.1 0.0.0.0
+net 10.1.11.1 0.0.0.0
+net 10.1.12.1 0.0.0.0
+net 1.1.1.1 0.0.0.0
+#int g0/0/0
+#ospf network-ty p2p
+
+[fw1]
+ospf 1
+ar 0
+auth md5 #1 ciph ICT@2019
+net 192.168.100.1 0.0.0.0
+net 10.1.1.2 0.0.0.0
+net 7.7.7.7 0.0.0.0
+#int g0/0/0
+#ospf network-ty p2p
+
