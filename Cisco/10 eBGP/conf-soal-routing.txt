@@ -1,0 +1,67 @@
+##IGRP
+[RA]
+router ospf 1
+network 100.100.120.0 255.255.255.0 ar 0
+network 100.100.121.0 255.255.255.0 ar 0
+
+[RB]
+router rip
+version 2
+network 100.100.110.0
+network 100.100.111.0 
+
+[RC]
+router ospf 1
+network 100.100.130.0 255.255.255.0 ar 0
+network 100.100.131.0 255.255.255.0 ar 0
+
+##BGP
+[RB]
+router bgp 4001
+neighbor 100.100.230.1 remote-as 4002
+neighbor 100.100.210.2 remote-as 5000
+network 100.100.110.0 mask 255.255.255.0
+network 100.100.111.0 mask 255.255.255.0
+
+[RA]
+router bgp 4002
+neighbor 100.100.230.2 remote-as 4001
+neighbor 100.100.240.1 remote-as 4003
+network 100.100.120.0 mask 255.255.255.0
+network 100.100.121.0 mask 255.255.255.0
+
+[RC]
+router bgp 4003
+neighbor 100.100.240.2 remote-as 4002
+neighbor 100.100.220.1 remote-as 5000
+network 100.100.130.0 mask 255.255.255.0
+network 100.100.131.0 mask 255.255.255.0
+
+[RD]
+router bgp 5000
+neighbor 100.100.210.1 remote-as 4001
+neighbor 100.100.220.2 remote-as 4003
+network 200.200.200.0 mask 255.255.255.0
+
+end
+wr
+
+[RA]
+router bgp 4002
+redis ospf 1
+router ospf 1
+redis bgp 4002
+
+[RC]
+router bgp 4003
+redis ospf 1
+router ospf 1
+redis bgp 4003
+
+##default route
+[ra1]
+ip route 0.0.0.0 0.0.0.0 100.100.120.1
+[rb1]
+ip route 0.0.0.0 0.0.0.0 100.100.110.1
+[rc1]
+ip route 0.0.0.0 0.0.0.0 100.100.130.1

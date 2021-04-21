@@ -1,0 +1,34 @@
+sh ip os neigh
+sh ip ro os
+sh ip prot
+sh ip ospf
+sh ip ospf int br
+sh ip os int
+
+sh ip prot
+sh ip os neigh
+
+sh ip os int g0/0
+en 
+conf t
+ro ospf 1
+pass g0/0
+end
+sh ip os int g0/0
+
+en
+conf t
+ro os 1
+auto ref 100
+
+int s0/0/1
+band 128
+int s0/0/0
+band 128
+
+ro os 1
+ar 0 auth mess
+int s0/0/0
+ip os mes 1 md5 class
+int s0/0/1
+ip os mes 1 md5 class

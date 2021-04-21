@@ -1,0 +1,44 @@
+en
+conf t
+no ip domain-lookup
+host R3
+
+line con 0
+
+logg sync
+
+line vty 0 4
+
+exit
+ban motd #Unauthorized access to this device is prohibited!#
+int g0/0
+ip add 192.168.3.1 255.255.255.0
+no sh
+int s0/0/0
+ip add 192.168.13.2 255.255.255.252
+clock rate 128000
+no sh
+int s0/0/1
+ip add 192.168.23.2 255.255.255.252
+no sh
+end
+wr
+
+#OSPF
+ro ospf 1
+net 192.168.3.0 0.0.0.255 ar 0
+net 192.168.13.0 0.0.0.3 ar 0
+net 192.168.23.0 0.0.0.3 ar 0
+end
+int lo0
+ip add 3.3.3.3 255.255.255.255
+end
+rel
+y
+y
+
+ro ospf 1
+router-id 33.33.33.33
+end
+clear ip os proc
+y

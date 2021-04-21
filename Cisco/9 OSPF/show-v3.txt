@@ -1,0 +1,12 @@
+servi pass
+
+sh ipv6 os neig
+sh ipv6 pro
+sh ipv ro os
+
+ipv6 router os 1
+ar 0 auth mess
+int s0/0/0
+ip os mes 1 md5 class
+int s0/0/1
+ip os mes 1 md5 class

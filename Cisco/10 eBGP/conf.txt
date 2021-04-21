@@ -1,0 +1,40 @@
+[r1]
+hostname R1
+no ip domain-lookup
+int s0/0/0
+ip add 198.133.219.1 255.255.255.248
+no sh
+end
+wr
+
+[r2]
+hostname R2
+no ip domain-lookup
+int s0/0/0
+ip add 198.133.219.2 255.255.255.248
+no sh
+int s0/0/1
+ip add 209.165.200.2 255.255.255.252
+no sh
+router bgp 65000
+neighbor 209.165.200.1 remo 65001
+network 198.133.219.0 mask 255.255.255.248
+end
+wr
+
+[ISP-1]
+hostname ISP-1
+no ip domain-lookup
+interface Loopback0
+ip address 10.10.10.10 255.255.255.255
+interface Serial0/0/1
+ip address 209.165.200.1 255.255.255.252
+no sh
+no shut
+ip route 0.0.0.0 0.0.0.0 lo0
+router bgp 65001
+bgp log-neighbor-changes
+network 0.0.0.0
+neighbor 209.165.200.2 remote-as 65000
+end
+wr
